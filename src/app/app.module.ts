@@ -14,10 +14,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { HomeComponent } from './components/home/home.component';
+import { BrandDialogComponent } from './components/brand-dialog/brand-dialog.component';
+import { DisplayBrandComponent } from './components/display-brand/display-brand.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    BrandDialogComponent,
+    DisplayBrandComponent
   ],
   imports: [
     BrowserModule,
