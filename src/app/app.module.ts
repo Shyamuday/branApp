@@ -17,6 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
 import { BrandDialogComponent } from './components/brand-dialog/brand-dialog.component';
 import { DisplayBrandComponent } from './components/display-brand/display-brand.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrandInterceptor } from './services/token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,13 +36,21 @@ import { DisplayBrandComponent } from './components/display-brand/display-brand.
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BrandInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

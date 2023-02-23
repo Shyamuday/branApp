@@ -1,1 +1,15 @@
-<p>display-brand works!</p>
+<mat-card class="brand-card">
+    <ng-container *ngFor="let item of allBrands; let i = index ">
+        <mat-card-header>
+            <div mat-card-avatar class="brand-header-image"></div>
+            <mat-card-title>{{item.name}} </mat-card-title>
+            <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{item.logo}}" alt="image">
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="editBrand(item.id)">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteBrand(item.id)">Delete</button>
+        </mat-card-actions>
+    </ng-container>
+</mat-card>
+<!-- {{allBrands | json}} -->
