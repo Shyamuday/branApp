@@ -17,11 +17,12 @@ export class BrandService {
   postBrand(data: Brand): Observable<Brand> {
     return this._http.post<Brand>(`${this.url}/companies/05980306-fdd0-46cc-beaa-e722fbffe0a0/brands`, data)
   };
-  patchBrand(branId: string, data: Brand): Observable<Brand[]> {
-    return this._http.post<Brand[]>(`${this.url}/brands/${branId}/delete`, data,)
+  patchBrand(id: string, data: Brand): Observable<Brand[]> {
+    return this._http.post<Brand[]>(`${this.url}/brands/${id}`, data,)
   };
 
-  deleteBrand(branId: string): Observable<Brand[]> {
-    return this._http.delete<Brand[]>(`${this.url}/brands/${branId}/delete`)
+  deleteBrand(id: string): Observable<any> {
+    return this._http.delete<any>(`${this.url}/brands/${id}/delete`)
+    // ()
   };
 }

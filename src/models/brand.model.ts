@@ -22,6 +22,9 @@ export enum ButtonType {
     Add = 'Add',
     Update = 'Update',
 }
-
+// export enum brandButton {
+//     Add = 'Add',
+//     Update = 'Update',
+// }
 
 

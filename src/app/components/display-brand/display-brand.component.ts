@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { filter, map } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BrandService } from 'src/app/services/brand.service';
 import { Brand } from 'src/models/brand.model';
 import { BrandDialogComponent } from '../brand-dialog/brand-dialog.component';
@@ -10,43 +9,51 @@ import { BrandDialogComponent } from '../brand-dialog/brand-dialog.component';
   templateUrl: './display-brand.component.html',
   styleUrls: ['./display-brand.component.scss']
 })
+
 export class DisplayBrandComponent implements OnInit {
   allBrands: Brand[] = [];
-  // brandById: Brand = {} as Brand
-  constructor(private brandService: BrandService, private matDialog: MatDialog, public matDialoRef: MatDialogRef<BrandDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private brandDialogService: BrandService) { }
+  brandById: Brand = {} as Brand;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+  constructor(private brandService: BrandService, private matDialog: MatDialog,
+
+  ) { }
 
   ngOnInit(): void {
     this.getAllBrands()
   }
-
   getAllBrands() {
     this.brandService.getBrand().subscribe({
       next: (brand) => {
+        this.isLoadingResults = false;
+        this.isRateLimitReached = brand === null;
         console.log(brand);
-
         this.allBrands = brand.results
       }
     })
-
   }
 
-  editBrand(id: string | undefined) {
+  editBrand(id: string) {
     const brandDialogRef = this.matDialog.open(BrandDialogComponent, {
       minHeight: "200px",
       minWidth: "400px",
       maxHeight: "70vh",
       maxWidth: "50vw",
-
+      data: this.brandById
     })
-    // const brandById: Brand = this.allBrands.find(singleBrands => singleBrands.id == id)
-    // brandById.name = this.data.name;
+    brandDialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.getAllBrands()
+      }
+    })
+    this.brandById = this.allBrands.find(singleBrands => singleBrands.id === id) as Brand;
   }
 
-  deleteBrand(id: string | undefined) {
-
-
-
+  deleteBrand(id: string) {
+    this.brandService.deleteBrand(id).subscribe({
+      next: (result) => {
+        alert('Brand deleted successfully')
+      }
+    })
   }
-
 }

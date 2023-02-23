@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -20,6 +20,8 @@ import { DisplayBrandComponent } from './components/display-brand/display-brand.
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrandInterceptor } from './services/token.interceptor';
+import { GlobalErrorHandler } from './Interceptor/global-error-handler.interceptor';
+import { ServerErrorInterceptor } from './Interceptor/server-error-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,9 @@ import { BrandInterceptor } from './services/token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: BrandInterceptor,
       multi: true
-    }
+    },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
