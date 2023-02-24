@@ -10,12 +10,10 @@
     transform: translate(-50%, -50%);
 }
 mat-card {
-    
     margin-top: 20px;
     position: relative;
     width: 400px;
     height: 400px;
-    // border-color: brown;
     background: radial-gradient(black, transparent);
 }
 mat-card-header{
@@ -36,7 +34,6 @@ img{
     // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
 }
-
 mat-card-actions{
     display: flex;
         align-items: center;
