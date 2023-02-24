@@ -1,25 +1,23 @@
+<div class="container">
+    <button mat-button (click)="  openDialogForm()" color="accent"> <mat-icon>add</mat-icon>Add Brand</button>
+</div>
 <div class="brand-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div class="brand-rate-limit-reached" *ngIf="isRateLimitReached">
         GitHub's API rate limit has been reached. It will be reset in one minute.
     </div>
 </div>
-<div class="parent">
-    <mat-card class="brand-card">
-        <ng-container *ngFor="let item of allBrands; let i = index ">
-            <mat-card-header>
-                <div mat-card-avatar class="brand-header-image"></div>
-                <mat-card-title>{{item.name}} </mat-card-title>
-                <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="{{item.logo}}" alt="image">
-            <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="editBrand(item.id ?? '' )">Edit</button>
-                <button mat-raised-button color="warn" (click)="deleteBrand(item.id ?? '')">Delete</button>
-            </mat-card-actions>
-        </ng-container>
+<ng-container *ngFor="let item of allBrands  let i = index ">
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="brand-header-image"></div>
+            <mat-card-title>{{item.name}} </mat-card-title>
+            <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{item.logo}}" alt="image">
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="editBrand(item.id ?? '' )">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteBrand(item.id ?? '')">Delete</button>
+        </mat-card-actions>
     </mat-card>
-</div>
-
-
-<!-- {{allBrands | json}} -->
+</ng-container>

@@ -6,14 +6,18 @@
 .formContainer{
  display: flex;
  flex-direction: column; 
+ align-items: center;
 }
 
-.formFieldContainer{
+mat-form-field>{
 margin-left: 25px;
 }
 mat-form-field{
     width: 90%;   
 }
+
+
+
 
 .buttonContainer{
     margin-right: 20px;

@@ -18,11 +18,10 @@ export class BrandService {
     return this._http.post<Brand>(`${this.url}/companies/05980306-fdd0-46cc-beaa-e722fbffe0a0/brands`, data)
   };
   patchBrand(id: string, data: Brand): Observable<Brand[]> {
-    return this._http.post<Brand[]>(`${this.url}/brands/${id}`, data,)
+    return this._http.patch<Brand[]>(`${this.url}/brands/${id}`, data,)
   };
 
   deleteBrand(id: string): Observable<any> {
     return this._http.delete<any>(`${this.url}/brands/${id}/delete`)
-    // ()
   };
 }
